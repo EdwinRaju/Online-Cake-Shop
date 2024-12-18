@@ -1,0 +1,61 @@
+﻿<style>
+    .shopping-cart-card {
+        height: 200px; /* Fixed height for consistency */
+        overflow: hidden; /* Prevent content overflow */
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column; 
+        height: 100%; 
+    }
+
+    .shopping-cart-image {
+        height: 150px; 
+        object-fit: cover;
+        padding: 0;
+        margin-top:10px;
+    }
+
+    .card {
+        padding: 0.5rem; 
+    }
+</style>
+
+
+<div class="row gx-3 mt-4">
+    <div class="col-8">
+        @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+        {
+            <div class="card shopping-cart-card mb-2">
+                <div class="row h-100">
+                    <div class="col-md-4">
+                        <img src="@line.Pie.ImageThumbnailUrl" class="img-fluid shopping-cart-image rounded-start" alt="@line.Pie.Name">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body" style="padding: 0.5rem;">
+                            <!-- Reduce padding here if needed -->
+                            <h3 class="card-text mt-5">@line.Amount x @line.Pie.Name</h3>
+                            <div class="d-flex justify-content-between">
+                                <h4>@line.Pie.ShortDescription</h4>
+                                <h2 style="margin-bottom:20px;">@line.Pie.Price.ToString("c")</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-4">
+        <div class="card shopping-cart-card p-3">
+            <div class="row">
+                <h4 class="col">Total:</h4>
+                <h4 class="col text-end">@Model.ShoppingCartTotal.ToString("c")</h4>
+            </div>
+            <hr />
+            <div class="text-center d-grid">
+                <a class="btn btn-secondary" asp-controller="Order" asp-action="Checkout"><h4>CheckOut Now</h4></a>
+            </div>
+        </div>
+    </div>
+</div>

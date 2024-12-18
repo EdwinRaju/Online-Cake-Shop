@@ -1,0 +1,45 @@
+﻿@model BethanysPieShop.ViewModels.PieListViewModel
+<style>
+    .related-pie-image {
+        height: 200px; /* Set your desired height */
+        object-fit: cover; /* This will maintain the aspect ratio and cover the set height */
+    }
+</style>
+
+<h2 class="my-5">
+    @Model.SelectedPie.Name
+</h2>
+
+<div class="row gx-5">
+    <img class="img-fluid col-5" src="@Model.SelectedPie.ImageThumbnailUrl" alt="@Model.SelectedPie.Name" />
+    <div class="col-7">
+        <h4>@Model.SelectedPie.ShortDescription</h4>
+        <p>@Model.SelectedPie.LongDescription</p>
+        <h3>@Model.SelectedPie.Price.ToString("c")</h3>
+        <a asp-controller="ShoppingCart"
+           asp-action="AddToShoppingCart"
+           asp-route-pieId="@Model.SelectedPie.PieId"
+           class="btn btn-secondary">
+            Add to Cart
+        </a>
+    </div>
+</div>
+
+<!-- Optional: Display related pies -->
+<h4>Related Pies</h4>
+<div class="row">
+    @foreach (var pie in Model.Pies)
+    {
+        <div class="col-md-4">
+            <h3>@pie.Name</h3>
+            <img class="img-fluid related-pie-image" src="@pie.ImageThumbnailUrl" alt="@pie.Name" />
+            <p>@pie.ShortDescription</p>
+            <a asp-controller="ShoppingCart"
+               asp-action="AddToShoppingCart"
+               asp-route-pieId="@pie.PieId"
+               class="btn btn-secondary">
+                Add to Cart
+            </a>
+        </div>
+    }
+</div>

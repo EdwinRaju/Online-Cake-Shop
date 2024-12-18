@@ -1,0 +1,26 @@
+﻿<div class="container mt-5">
+    <h1 class="text-center">@Model.CurrentCategory</h1>
+    <div class="row">
+        @foreach (var pie in Model.Pies)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card" style="background-color:white;">
+                    <img src="@pie.ImageUrl" class="card-img-top" alt="@pie.Name" style="width:410px; height:220px;"/>
+                    <div class="card-body">
+                        <h5 class="card-title">@pie.Name</h5>
+                        <p class="card-text">@pie.ShortDescription</p>
+                        <p class="card-text"><strong>Price:</strong> @pie.Price.ToString("c")</p>
+                        <p class="card-text"><strong>Category:</strong> @pie.Category.CategoryName</p>
+                        <a asp-controller="Pie" asp-action="Details" asp-route-id="@pie.PieId" class="btn btn-primary">View Details</a>
+                        <a asp-controller="ShoppingCart"
+                           asp-action="AddToShoppingCart"
+                           asp-route-pieId="@pie.PieId"
+                           class="btn btn-secondary">
+                            Add to Cart
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,24 @@
+﻿@model Pie
+
+
+<div class="col-12 col-md-4">
+    <!-- Adjusted to show 3 cards in larger screens -->
+    <div class="card pie-card h-100">
+        <img src="@Model.ImageThumbnailUrl" class="card-img-top" alt="@Model.Name">
+        <div class="card-body d-flex flex-column">
+            <h4 class="card-title">@Model.Name</h4>
+            <div class="mt-auto d-flex justify-content-between align-items-end">
+                <h5 class="text-nowrap">@Model.Price.ToString("c")</h5>
+                <a asp-controller="ShoppingCart"
+                    asp-action="AddToShoppingCart"
+                    asp-route-pieId="@Model.PieId"
+                    class="btn btn-secondary">Add to Cart
+                </a>
+                <a asp-controller="Pie"
+                   asp-action="Details"
+                   asp-route-id="@Model.PieId"
+                   class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+</div>
